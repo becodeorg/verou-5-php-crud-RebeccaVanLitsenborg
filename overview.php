@@ -6,6 +6,10 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Track your collection of Books</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -19,8 +23,8 @@
             <li><?= $book['title']?> | 
                 <?= $book['author']?> | 
                 <?= $book['genre']?> | 
-                <a href="edit.php?id=<?= $book['id']; ?>">Edit</a> | 
-                <a href="delete.php?id=<?= $book['id']; ?>">Delete</a>
+                <a href="edit.php?id=<?= $book['id'];  ?>" class="edit-link">Edit</a> | 
+                <a href="delete.php?id=<?= $book['id']; ?>" class="delete-link">Delete</a>
             </li>
     <?php 
             endforeach;

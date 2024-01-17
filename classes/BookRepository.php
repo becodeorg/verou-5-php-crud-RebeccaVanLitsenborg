@@ -1,13 +1,9 @@
 <?php
 
-// This class is focussed on dealing with queries for one type of data
-// That allows for easier re-using and it's rather easy to find all your queries
-// This technique is called the repository pattern
 class BookRepository
 {
     private DatabaseManager $databaseManager;
 
-    // This class needs a database connection to function
     public function __construct(DatabaseManager $databaseManager)
     {
         $this->databaseManager = $databaseManager;
@@ -29,7 +25,6 @@ class BookRepository
         }
     }
 
-    // Get one
     public function find(int $id): ?array
     {
         try {
@@ -47,51 +42,38 @@ class BookRepository
         }
     }
 
-    // Get all
     public function get(): array
-    
-        // TODO: Create an SQL query
-        // TODO: Use your database connection (see $databaseManager) and send your query to your database.
-        // TODO: fetch your data at the end of that action.
-        // TODO: replace dummy data by real one
-        
-            // Your SQL query to retrieve data from the database
-            {
-                try {
-                    $query = "SELECT * FROM favorites";
-                    $statement = $this->databaseManager->connection->prepare($query);
-                    $statement->execute();
-        
-                    $data = $statement->fetchAll(PDO::FETCH_ASSOC);
-        
-                    return $data;
-                } catch (PDOException $error) {
-                    // Handle any exceptions that may occur during the query execution
-                    echo $error->getMessage();
-                    return array();
-                }
-            }
+    {
+        try {
+            $query = "SELECT * FROM favorites";
+            $statement = $this->databaseManager->connection->prepare($query);
+            $statement->execute();
 
-        // We get the database connection first, so we can apply our queries with it
-        // return $this->databaseManager->connection-> (runYourQueryHere)
-    
+            $data = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-        public function edit(int $id): ?array
-        {
-            try {
-                $query = "SELECT * FROM favorites WHERE id = :id";
-                $statement = $this->databaseManager->connection->prepare($query);
-                $statement->bindParam(':id', $id, PDO::PARAM_INT);
-                $statement->execute();
-    
-                $data = $statement->fetch(PDO::FETCH_ASSOC);
-    
-                return $data ? $data : null;
-            } catch (PDOException $error) {
-                echo "Error: " . $error->getMessage();
-                return null;
-            }
+            return $data;
+        } catch (PDOException $error) {
+            echo $error->getMessage();
+            return array();
         }
+    }
+
+    public function edit(int $id): ?array
+    {
+        try {
+            $query = "SELECT * FROM favorites WHERE id = :id";
+            $statement = $this->databaseManager->connection->prepare($query);
+            $statement->bindParam(':id', $id, PDO::PARAM_INT);
+            $statement->execute();
+
+            $data = $statement->fetch(PDO::FETCH_ASSOC);
+
+            return $data ? $data : null;
+        } catch (PDOException $error) {
+            echo "Error: " . $error->getMessage();
+            return null;
+        }
+    }
 
     public function update(int $id, string $title, string $author, string $genre): void
     {
