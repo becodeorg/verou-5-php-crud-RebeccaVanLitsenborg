@@ -33,6 +33,9 @@ switch ($action) {
         break;
     case 'update':
         update($bookRepository);
+        break;   
+    case 'edit':
+        edit($bookRepository);
         break;
     default:
         overview($books);
@@ -41,8 +44,6 @@ switch ($action) {
 
 function overview($books)
 {
-    // Load your view
-    // Tip: you can load this dynamically and based on a variable, if you want to load another view
     require 'overview.php';
 }
 

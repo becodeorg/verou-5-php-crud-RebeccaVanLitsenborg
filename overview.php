@@ -16,7 +16,12 @@
         if (isset($books) && is_array($books)) {
             foreach ($books as $book) :
     ?>
-            <li><?= $book['title']?> | <?= $book['author']?> | <?= $book['genre']?> | <a href="edit.php">Edit</a>
+            <li><?= $book['title']?> | 
+                <?= $book['author']?> | 
+                <?= $book['genre']?> | 
+                <a href="edit.php?id=<?= $book['id']; ?>">Edit</a> | 
+                <a href="delete.php?id=<?= $book['id']; ?>">Delete</a>
+            </li>
     <?php 
             endforeach;
         } else {
